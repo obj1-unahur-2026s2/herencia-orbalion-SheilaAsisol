@@ -1,0 +1,40 @@
+import orbalion.*
+import entrenadores.*
+import tecnologias.*
+
+describe "Requerimientos funcionales" {
+
+  test "energía total de un equipo" {
+    assert.throwsException({ Entrenadores.cambiarRol("Autor") })
+    
+}
+    method crearEntrenador(){return new Entrenadores(cantExperiencia = 10, estaEnSintonia = true)}
+    method crearLuminicoRadiactivo(){return  new Luminicos(nombre = "pepito", nivelDeEnergia = 20,entrenador = self.crearEntrenador(),nivelDeRadiacion = 6000)}
+    const pepito = self.crearLuminicoRadiactivo()
+    test "Un lumínico con radiación > 5000 y sin tecnologías activas → su energía total es su energía base" {
+        assert.equals(pepito.nivelDeEnegia(),pepito.enrgiaTotal())}
+    
+    method crearLuminico(){return  new Luminicos(nombre = "pepito", nivelDeEnergia = 20,entrenador = self.crearEntrenador(),nivelDeRadiacion = 4000)}
+    const juanito = self.crearLuminico()
+
+    test "Un lumínico con radiación < 5000 → obtiene el bono del 10%" {
+      assert.equals(22,juanito.enrgiaTotal())}
+    
+    method crearUnSinteticoMayor(){return new Sinteticos(nombre = "pepito", nivelDeEnergia = 20,entrenador = self.crearEntrenador(), nivelDeProcesamiento = 10, cantDeModulos = 6, estanCertificados = true)}  
+    const sintMayor = self.crearUnSinteticoMayor()
+    test "Un equipo sintético con 6 módulos → aplica correctamente la penalización del 20%." {
+      assert.equals(16,sintMayor.enrgiaTotal())
+    }
+    method crearUnSinteticoMenor(){
+        const tecno1 = new Tecnologias(nombre = "cosa1", valorEnergetico = 10, activa = true)
+        const tecno2 = new Tecnologias(nombre = "cosa2", valorEnergetico = 1000, activa = false)
+        return new Sinteticos(nombre = "pepito", nivelDeEnergia = 20,entrenador = self.crearEntrenador(),tecnologias = [tecno1, tecno2], nivelDeProcesamiento = 10, cantDeModulos = 4, estanCertificados = true)}  
+    const sintMenor = self.crearUnSinteticoMenor()
+    test "Un equipo sintético con 4 módulos y 2 tecnologías complementarias → suma correctamente los valores energéticos." {
+      assert.equals(30,sintMenor.enrgiaTotal())
+    }
+
+  }
+  
+
+

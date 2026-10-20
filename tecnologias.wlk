@@ -5,4 +5,7 @@ class Tecnologias{
     method nombre() = nombre
     method valorEnergetico() = valorEnergetico
     method activa() = activa
+
+
+
 } 

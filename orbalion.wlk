@@ -20,7 +20,7 @@ class Luminicos inherits Equipos{
 
     override method energiaTotal() { 
         return if(nivelDeRadiacion <= 5000) {
-            tecnologias.filter({t =>t.activas()}).sum({t => t.valorEnergetico()}) + nivelDeEnergia * 1.01
+            tecnologias.filter({t =>t.activas()}).sum({t => t.valorEnergetico()}) + nivelDeEnergia * 1.10
         } else {
             tecnologias.filter({t =>t.activas()}).sum({t => t.valorEnergetico()}) + nivelDeEnergia 
         }
